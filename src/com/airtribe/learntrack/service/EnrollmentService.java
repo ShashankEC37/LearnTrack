@@ -68,6 +68,9 @@ public class EnrollmentService {
 
     public void updateStatus(int enrollmentId, EnrollmentStatus newStatus)
             throws EntityNotFoundException, InvalidInputException {
+        if (newStatus != EnrollmentStatus.COMPLETED && newStatus != EnrollmentStatus.CANCELLED) {
+            throw new InvalidInputException("Status can only be changed to COMPLETED or CANCELLED.");
+        }
         Enrollment enrollment = findEnrollmentById(enrollmentId);
         if (enrollment.getStatus() != EnrollmentStatus.ACTIVE) {
             throw new InvalidInputException(

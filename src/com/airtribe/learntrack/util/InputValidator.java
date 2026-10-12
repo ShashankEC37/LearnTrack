@@ -7,6 +7,9 @@ public final class InputValidator {
     }
 
     public static int parseInt(String text) throws InvalidInputException {
+        if (text == null) {
+            throw new InvalidInputException("Input cannot be empty.");
+        }
         try {
             return Integer.parseInt(text.trim());
         } catch (NumberFormatException e) {
@@ -30,6 +33,6 @@ public final class InputValidator {
     }
 
     public static boolean isValidEmail(String email) {
-        return email != null && email.matches("^[\\w.+-]+@[\\w-]+\\.[\\w.-]+$");
+        return email != null && email.matches("^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$");
     }
 }
